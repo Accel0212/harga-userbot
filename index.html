@@ -29,9 +29,17 @@
             height: 100%;
             background: white;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             transition: opacity 0.5s ease-out;
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
         }
 
         .loading-spinner {
@@ -65,32 +73,23 @@
             margin-bottom: 10px;
         }
 
-        /* Logo Instagram & Telegram */
-        .social-icons {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            transform: translateY(-50%);
+        .price-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .social-icons a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            animation: spin 2s infinite linear;
-        }
-
-        .social-icons img {
-            width: 30px;
-            height: 30px;
+        .order-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
         }
 
         /* Hamburger Menu */
@@ -169,17 +168,22 @@
     <!-- Animasi Loading -->
     <div class="loading-container" id="loading">
         <div class="loading-spinner"></div>
+        <div class="loading-text">Wait a minute to enter the price list</div>
     </div>
 
     <!-- Konten Website -->
     <div class="container" id="content">
         <h1>Daftar Harga Accel UserBot</h1>
-    </div>
-
-    <!-- Logo Instagram & Telegram -->
-    <div class="social-icons">
-        <a href="https://instagram.com/accelgyz"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"></a>
-        <a href="https://t.me/OwnTelegramX"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></a>
+        <div class="price-item">
+            <p><strong>Harga 1 Bulan</strong></p>
+            <p>IDR 10.000</p>
+            <a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a>
+        </div>
+        <div class="price-item">
+            <p><strong>Harga 2 Bulan</strong></p>
+            <p>IDR 20.000</p>
+            <a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a>
+        </div>
     </div>
 
     <!-- Hamburger Menu -->
@@ -193,7 +197,6 @@
     <div class="sidebar" id="sidebar">
         <a href="#" onclick="showPayment()">Payment</a>
         <a href="#" onclick="showProfile()">Data Diri</a>
-        <a href="#" onclick="hideSidebar()">Dashboard</a>
     </div>
 
     <!-- Modal Payment -->
@@ -215,11 +218,28 @@
     </div>
 
     <script>
-        function toggleSidebar() { document.getElementById("sidebar").style.right = "0"; }
-        function hideSidebar() { document.getElementById("sidebar").style.right = "-250px"; }
-        function showPayment() { document.getElementById("paymentModal").style.display = "block"; }
-        function showProfile() { document.getElementById("profileModal").style.display = "block"; }
-        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+        function toggleSidebar() { 
+            document.getElementById("sidebar").style.right = "0"; 
+        }
+
+        function showPayment() { 
+            document.getElementById("paymentModal").style.display = "block"; 
+        }
+
+        function showProfile() { 
+            document.getElementById("profileModal").style.display = "block"; 
+        }
+
+        function closeModal(id) { 
+            document.getElementById(id).style.display = "none"; 
+        }
+
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("content").style.display = "block";
+            }, 4000);
+        };
     </script>
 
 </body>
