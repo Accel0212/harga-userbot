@@ -92,6 +92,34 @@
             margin-top: 10px;
         }
 
+        /* Logo Instagram & Telegram */
+        .social-icons {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform: translateY(-50%);
+        }
+
+        .social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: spin 2s infinite linear;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
         /* Sidebar */
         .sidebar {
             position: fixed;
@@ -132,11 +160,6 @@
             text-align: center;
         }
 
-        .modal img {
-            width: 60px;
-            animation: spin 3s infinite linear;
-        }
-
         .close-btn {
             margin-top: 20px;
             padding: 10px;
@@ -171,20 +194,19 @@
         </div>
     </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="showPayment()">Payment</a>
-        <a href="#" onclick="showProfile()">Data Diri</a>
+    <!-- Logo Instagram & Telegram -->
+    <div class="social-icons">
+        <a href="https://instagram.com/accelgyz">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+        </a>
+        <a href="https://t.me/OwnTelegramX">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+        </a>
     </div>
 
-    <!-- Modal Payment -->
-    <div class="modal" id="paymentModal">
-        <h3>DAFTAR HARGA PAYMENT PEMBELIAN</h3>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/QRIS_logo.svg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/DANA_Logo.png">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_ovo_purple.svg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/GoPay_Logo.png">
-        <button class="close-btn" onclick="closeModal('paymentModal')">CLOSE</button>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="showProfile()">Data Diri</a>
     </div>
 
     <!-- Modal Data Diri -->
@@ -200,10 +222,6 @@
             document.getElementById("sidebar").style.right = "0"; 
         }
 
-        function showPayment() { 
-            document.getElementById("paymentModal").style.display = "block"; 
-        }
-
         function showProfile() { 
             document.getElementById("profileModal").style.display = "block"; 
         }
@@ -216,7 +234,7 @@
             setTimeout(function() {
                 document.getElementById("loading").style.display = "none";
                 document.getElementById("content").style.display = "block";
-            }, 4000);
+            }, 5000);
         };
     </script>
 
