@@ -11,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -33,13 +33,7 @@
             align-items: center;
             justify-content: center;
             transition: opacity 0.5s ease-out;
-        }
-
-        .loading-text {
-            margin-top: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
+            z-index: 999;
         }
 
         .loading-spinner {
@@ -49,6 +43,12 @@
             border-top: 5px solid #007bff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
         }
 
         @keyframes spin {
@@ -73,6 +73,11 @@
             margin-bottom: 10px;
         }
 
+        .price-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+
         .price-item {
             background: #f9f9f9;
             padding: 15px;
@@ -81,59 +86,112 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
+        .price-item p {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Tombol Order & Data Diri */
         .button-container {
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
         }
 
-        .order-btn, .data-btn, .close-btn {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .order-btn {
-            background: #007bff;
-            margin-right: 5px;
-        }
-
-        .data-btn {
-            background: #28a745;
-            margin-left: 5px;
-        }
-
-        .close-btn {
-            background: red;
-            margin-top: 20px;
+        .btn {
+            padding: 10px 15px;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
         }
 
-        .order-btn:hover, .data-btn:hover, .close-btn:hover {
+        .btn-order {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-order:hover {
+            background: #0056b3;
             transform: scale(1.1);
         }
 
-        /* Notifikasi (Pop-up) */
-        .modal {
+        .btn-data {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-data:hover {
+            background: #218838;
+            transform: scale(1.1);
+        }
+
+        /* Popup Data Diri */
+        .popup {
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 400px;
             background: white;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             border-radius: 10px;
-            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 90%;
+            max-width: 400px;
+            z-index: 1000;
         }
+
+        .popup p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .btn-close {
+            margin-top: 15px;
+            padding: 8px 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-close:hover {
+            background: #c82333;
+        }
+
+        /* Logo Instagram & Telegram */
+        .social-icons {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform: translateY(-50%);
+        }
+
+        .social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: spin 2s infinite linear;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
     </style>
 </head>
 <body>
@@ -141,37 +199,51 @@
     <!-- Animasi Loading -->
     <div class="loading-container" id="loading">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Wait a minute to enter the price list</div>
+        <p class="loading-text">Wait a minute to enter the price list</p>
     </div>
 
     <!-- Konten Website -->
     <div class="container" id="content">
         <h1>Daftar Harga Accel UserBot</h1>
-
-        <!-- Daftar Harga -->
-        <div class="price-item"><p><strong>Harga 1 Bulan</strong></p><p>IDR 10.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 2 Bulan</strong></p><p>IDR 20.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 3 Bulan</strong></p><p>IDR 30.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 4 Bulan</strong></p><p>IDR 40.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 5 Bulan</strong></p><p>IDR 50.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 6 Bulan</strong></p><p>IDR 60.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 7 Bulan</strong></p><p>IDR 70.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 8 Bulan</strong></p><p>IDR 80.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 9 Bulan</strong></p><p>IDR 90.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
-        <div class="price-item"><p><strong>Harga 10 Bulan</strong></p><p>IDR 100.000</p><div class="button-container"><a href="https://t.me/OwnTelegramX" class="order-btn">Order Disini</a><button class="data-btn" onclick="showProfile()">Data Diri</button></div></div>
+        <div class="price-list">
+            <!-- Daftar harga -->
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`
+                        <div class="price-item">
+                            <p><strong>Harga ${i} Bulan</strong></p>
+                            <p>IDR ${i * 10}.000</p>
+                            <div class="button-container">
+                                <a href="https://t.me/OwnTelegramX" class="btn btn-order">Order Disini</a>
+                                <button class="btn btn-data" onclick="showPopup()">Data Diri</button>
+                            </div>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
     </div>
 
-    <!-- Pop-up Data Diri -->
-    <div class="modal" id="profileModal">
-        <p>Halo, saya Ovan Sev Farel Sirait, atau Ovan untuk singkatnya.</p>
-        <p>Saya pemula di dunia pemrograman dan saat ini belajar JavaScript, Python, HTML, dan CSS.</p>
-        <button class="close-btn" onclick="closeModal()">CLOSE</button>
+    <!-- Logo Instagram & Telegram -->
+    <div class="social-icons">
+        <a href="https://instagram.com/accelgyz"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"></a>
+        <a href="https://t.me/OwnTelegramX"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></a>
+    </div>
+
+    <!-- Popup Data Diri -->
+    <div class="popup" id="popup">
+        <p>Halo, saya Ovan Sev Farel Sirait, atau Ovan untuk singkatnya. Di media sosial, saya sering dipanggil Accel. Saya pemula di dunia pemrograman dan saat ini sedang belajar JavaScript, Python, HTML, dan CSS. Situs web ini masih dalam tahap pengembangan.</p>
+        <button class="btn-close" onclick="closePopup()">Close</button>
     </div>
 
     <script>
-        function showProfile() { document.getElementById("profileModal").style.display = "block"; }
-        function closeModal() { document.getElementById("profileModal").style.display = "none"; }
-        window.onload = function() { setTimeout(() => { document.getElementById("loading").style.display = "none"; document.getElementById("content").style.display = "block"; }, 5000); };
+        setTimeout(() => {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }, 5000);
+
+        function showPopup() { document.getElementById("popup").style.display = "block"; }
+        function closePopup() { document.getElementById("popup").style.display = "none"; }
     </script>
 
 </body>
