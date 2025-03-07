@@ -5,67 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Harga Accel UserBot</title>
     <style>
-        /* Gaya CSS */
+        /* Gaya Umum */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            text-align: center;
             padding: 50px;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Kontainer utama */
-        .main-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            display: none;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        /* Logo Instagram & Telegram */
-        .logo-container {
-            position: relative;
-            width: 80px;
-            height: 80px;
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: transform 0.3s;
-        }
-
-        .logo-container:hover img {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
-        /* Efek lingkaran animasi */
-        .circle-loader {
-            width: 100%;
-            height: 100%;
-            border: 5px solid rgba(0, 123, 255, 0.3);
-            border-top: 5px solid #007bff;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         /* Animasi Loading */
@@ -77,7 +23,6 @@
             height: 100%;
             background: white;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             transition: opacity 0.5s ease-out;
@@ -90,35 +35,54 @@
             border-top: 5px solid #007bff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 15px;
         }
 
-        .loading-text {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 18px;
-            color: #333;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Konten daftar harga */
+        /* Konten utama */
         .container {
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            flex: 1;
+            max-width: 500px;
+            margin: auto;
+            display: none;
+            position: relative;
         }
 
         h1 {
             color: #007bff;
             font-size: 24px;
-            margin-bottom: 10px;
         }
 
+        /* Sosial Media */
+        .social-icons {
+            position: absolute;
+            left: -70px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-icons a img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Harga List */
         .price-list {
+            text-align: left;
             margin-top: 20px;
         }
 
@@ -151,6 +115,73 @@
         .button:hover {
             background: #0056b3;
         }
+
+        /* Menu Navigasi */
+        .menu-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .menu-bar {
+            width: 30px;
+            height: 5px;
+            background: #007bff;
+            margin: 6px 0;
+            border-radius: 5px;
+        }
+
+        .menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            width: 200px;
+            text-align: left;
+        }
+
+        .menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .popup img {
+            width: 80px;
+            margin: 10px;
+        }
+
+        .close-btn {
+            display: block;
+            margin-top: 10px;
+            cursor: pointer;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -158,51 +189,69 @@
     <!-- Animasi Loading -->
     <div class="loading-container" id="loading">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Wait a minute to enter the price list...</div>
     </div>
 
     <!-- Konten Website -->
-    <div class="main-container" id="content">
-        
-        <!-- Logo Instagram di Kiri -->
-        <div class="logo-container">
-            <div class="circle-loader"></div>
-            <a href="https://instagram.com/accelgyz" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-            </a>
+    <div class="container" id="content">
+        <h1>Daftar Harga Accel UserBot</h1>
+
+        <!-- Ikon Sosial Media -->
+        <div class="social-icons">
+            <a href="https://instagram.com/accelgyz"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+            <a href="https://t.me/OwnTelegramX"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></a>
         </div>
 
         <!-- Daftar Harga -->
-        <div class="container">
-            <h1>Daftar Harga Accel UserBot</h1>
-            <div class="price-list">
-                <div class="price-item"><p><strong>Harga 1 Bulan</strong></p><p>IDR 10.000</p><a href="https://t.me/OwnTelegramX" class="button">Beli</a></div>
-                <div class="price-item"><p><strong>Harga 2 Bulan</strong></p><p>IDR 20.000</p><a href="https://t.me/OwnTelegramX" class="button">Beli</a></div>
-                <div class="price-item"><p><strong>Harga 3 Bulan</strong></p><p>IDR 30.000</p><a href="https://t.me/OwnTelegramX" class="button">Beli</a></div>
-                <div class="price-item"><p><strong>Harga 4 Bulan</strong></p><p>IDR 40.000</p><a href="https://t.me/OwnTelegramX" class="button">Beli</a></div>
-                <div class="price-item"><p><strong>Harga 5 Bulan</strong></p><p>IDR 50.000</p><a href="https://t.me/OwnTelegramX" class="button">Beli</a></div>
-            </div>
+        <div class="price-list">
+            <div class="price-item"><p><strong>Harga 1 Bulan</strong> - IDR 10.000</p></div>
+            <div class="price-item"><p><strong>Harga 2 Bulan</strong> - IDR 20.000</p></div>
+            <div class="price-item"><p><strong>Harga 3 Bulan</strong> - IDR 30.000</p></div>
+            <div class="price-item"><p><strong>Harga 4 Bulan</strong> - IDR 40.000</p></div>
         </div>
 
-        <!-- Logo Telegram di Kanan -->
-        <div class="logo-container">
-            <div class="circle-loader"></div>
-            <a href="https://t.me/OwnTelegramX" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-            </a>
+        <!-- Menu Navigasi -->
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
         </div>
 
+        <div class="menu" id="menu">
+            <a href="#" onclick="showPopup('payment')">Payment</a>
+            <a href="#" onclick="showPopup('data')">Data Diri</a>
+            <a href="#" onclick="location.reload()">Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <p id="popup-text"></p>
+        <div id="popup-content"></div>
+        <span class="close-btn" onclick="closePopup()">Tutup</span>
     </div>
 
     <script>
-        // Script untuk menghilangkan loading setelah 4 detik
-        setTimeout(function() {
-            document.getElementById("loading").style.opacity = "0";
-            setTimeout(function() {
-                document.getElementById("loading").style.display = "none";
-                document.getElementById("content").style.display = "flex";
-            }, 500);
-        }, 4000);
+        function toggleMenu() {
+            document.getElementById("menu").style.display = 
+                document.getElementById("menu").style.display === "block" ? "none" : "block";
+        }
+
+        function showPopup(type) {
+            let text = "", content = "";
+            if (type === "payment") {
+                text = "BERIKUT ADALAH DAFTAR PAYMENT ADMIN";
+                content = "<img src='qris.png'><img src='dana.png'><img src='ovo.png'><img src='gopay.png'>";
+            } else if (type === "data") {
+                text = "Halo, saya Ovan Sev Farel Sirait...";
+            }
+            document.getElementById("popup-text").innerHTML = text;
+            document.getElementById("popup-content").innerHTML = content;
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
     </script>
 
 </body>
