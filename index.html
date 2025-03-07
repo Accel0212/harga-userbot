@@ -23,6 +23,7 @@
             height: 100%;
             background: white;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             transition: opacity 0.5s ease-out;
@@ -35,13 +36,24 @@
             border-top: 5px solid #007bff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin-bottom: 15px;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
+        /* Teks Loading */
+        .loading-text {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            color: #333;
+        }
+
         /* Konten utama (tersembunyi dulu) */
         .container {
             background: white;
@@ -100,6 +112,7 @@
     <!-- Animasi Loading -->
     <div class="loading-container" id="loading">
         <div class="loading-spinner"></div>
+        <div class="loading-text">Wait a minute to enter the price list...</div>
     </div>
 
     <!-- Konten Website -->
@@ -125,14 +138,14 @@
     </div>
 
     <script>
-        // Script untuk menghilangkan loading setelah 2 detik
+        // Script untuk menghilangkan loading setelah 4 detik
         setTimeout(function() {
             document.getElementById("loading").style.opacity = "0"; // Hilangkan loading dengan efek
             setTimeout(function() {
                 document.getElementById("loading").style.display = "none"; // Sembunyikan loading
                 document.getElementById("content").style.display = "block"; // Tampilkan konten utama
             }, 500); // Delay sebelum loading benar-benar hilang
-        }, 2000); // 2 detik loading
+        }, 4000); // 4 detik loading
     </script>
 
 </body>
